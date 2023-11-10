@@ -143,7 +143,7 @@ const updateSummary=() =>{
 } 
 const addItem = () =>{
 
- 
+ var max=0;
   let category = prompt('CATEGORY:(income(i)/expense(e)) '); 
   let amount = prompt('amount? '); 
   let date = prompt('enter date (mm/dd/yyyy) : ');
@@ -176,12 +176,13 @@ const addItem = () =>{
         max += tableEntries[j].amount;
       }
 
-  }    
+  }   
 }
 
-  dateLimit();
+ 
   if(category=="e"){
-  if((max+amount) <= limit){
+    dateLimit();
+    if((Number(max)+Number(amount)) <= Number(limit)){
    // Push new data 
     console.log('Expense has been added');
     tableEntries.push({ 
@@ -193,9 +194,12 @@ const addItem = () =>{
 }); 
     updateSummary();
    }
+   else{
+    console.log('Daily expense has been exceeded. Cut short on your daily expenses!');
+   } 
   }
-  if(category=="i"){
-    console.log('Expense has been added');
+    if(category=="i"){
+    console.log('Income has been added');
     tableEntries.push({ 
     category: category, 
     amount: Number(amount), 
@@ -203,10 +207,7 @@ const addItem = () =>{
     description: description
    
 }); 
-  }
-    else {
-      console.log('Daily expense has been exceeded. Cut short on your daily expenses!');
-     } 
+  } 
 
 
 
@@ -217,5 +218,4 @@ const addItem = () =>{
 } 
 updateSummary();
 intro();
-
 
