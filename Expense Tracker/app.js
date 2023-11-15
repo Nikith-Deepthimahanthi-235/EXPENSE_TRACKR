@@ -5,7 +5,7 @@ var updatedBal = 0;
 var updatedExp = 0;
 var updatedInc = 0;
 //initial limit is taken to be maximum
-var limit = 100000000000000000;
+var limit = 0;
 var dayExpense = 0;
 let tableEntries = [ 
   // examples if needed
@@ -52,6 +52,7 @@ const switchy = () =>{
       deletion(tableEntries, 'date', d);
       break;
     case 6:
+      console.log('Thanks for ur time! and make sure to watch on ur expenses');
       return;
     default:{
       console.log('choose an option from 1 to 4');
@@ -182,7 +183,17 @@ const addItem = () =>{
  
   if(category=="e"){
     dateLimit();
-    if((Number(max)+Number(amount)) <= Number(limit)){
+    if(Number(limit)==0){
+         // Push new data 
+    console.log('Expense has been added');
+    tableEntries.push({ 
+    category: category, 
+    amount: Number(amount), 
+    date: date,
+    description: description
+    });
+  }
+    else if (Number(limit)>0 && (Number(max)+Number(amount)) <= Number(limit)){
    // Push new data 
     console.log('Expense has been added');
     tableEntries.push({ 
